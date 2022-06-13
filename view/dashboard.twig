@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Car Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/view/css/output.css" rel="stylesheet">
+</head>
+<body>
+<div class="container py-8 ">
+    <div class="grid grid-cols-6 gap-6">
+        <div class="col-start-1 col-span-2 bg-white dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl">
+            <h3 class="text-slate-900 dark:text-white mt-5 text-base font-medium tracking-tight">
+                The average price on cars sold for all time:
+            </h3>
+            <div class="container py-8">
+                <p class="font-mono">
+                    {{ year_sales.average }}
+                </p>
+            </div>
+        </div>
+        <div class="col-start-3 col-span-2 bg-white dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl">
+            <h3 class="text-slate-900 dark:text-white mt-5 text-base font-medium tracking-tight">
+                The average price on the cars sold today:
+            </h3>
+            <div class="container py-8">
+                <p class="font-mono">
+                    {{ today_sales.average }}
+                </p>
+            </div>
+        </div>
+        <div class="col-start-5 col-span-2 bg-white dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl">
+            <h3 class="text-slate-900 dark:text-white mt-5 text-base font-medium tracking-tight">
+                Cars sold last year:
+            </h3>
+            <div class="container py-8">
+                <table class="border-separate border border-slate-400">
+                    <thead>
+                    <tr>
+                        <th class="border border-slate-300">Date</th>
+                        <th class="border border-slate-300">Number of cars</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for cars in sold_cars %}
+                        <tr>
+                            <td class="border border-slate-300">{{ cars['date'] }}</td>
+                            <td class="border border-slate-300">{{ cars['cars'] }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class=" col-start-1 col-span-3 bg-white dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl">
+            <h3 class="text-slate-900 dark:text-white mt-5 text-base font-medium tracking-tight">Unsold cars:</h3>
+            <div class="container py-8">
+                <form method="get">
+                    <select name="order_by" id="order_form">
+                        <option value="-year">Descending year</option>
+                        <option value="year">Ascending year</option>
+                    </select>
+                    <input type="submit" value="Submit"/>
+                </form>
+                <table class="border-separate border border-slate-400">
+                    <thead>
+                    <tr>
+                        <th class="border border-slate-300">Car model</th>
+                        <th class="border border-slate-300">Year of production</th>
+                        <th class="border border-slate-300">Color</th>
+                        <th class="border border-slate-300">Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for cars in unsold_cars %}
+                        <tr>
+                            <td class="border border-slate-300">{{ cars['model'] }}</td>
+                            <td class="border border-slate-300">{{ cars['year'] }}</td>
+                            <td class="border border-slate-300">{{ cars['color'] }}</td>
+                            <td class="border border-slate-300">{{ cars['price'] }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class=" col-start-4 col-span-3 bg-white dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl">
+            <h3 class="text-slate-900 dark:text-white mt-5 text-base font-medium tracking-tight">Cars on sale</h3>
+            <div class="container py-8">
+                <table class="border-separate border border-slate-400">
+                    <thead>
+                    <tr>
+                        <th class="border border-slate-300">Model</th>
+                        <th class="border border-slate-300">Quantity</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for cars in cars_on_sale %}
+                        <tr>
+                            <td class="border border-slate-300">{{ cars['model'] }}</td>
+                            <td class="border border-slate-300">{{ cars['quantity'] }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/view/js/script.js"></script>
+</body>
+</html>

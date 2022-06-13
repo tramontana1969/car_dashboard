@@ -39,12 +39,12 @@ class Model
         return $data->fetchAll();
     }
 
-    public function getUnsoldCars(): array
+    public function getUnsoldCars($order): array
     {
-        $query = "SELECT Vehicle_drectory.model as model, Vehicle_drectory.year_of_production as 'year of production',
+        $query = "SELECT Vehicle_drectory.model as model, Vehicle_drectory.year_of_production as year,
                   Showroom_cars.color as color, Showroom_cars.price as price FROM Vehicle_drectory 
                   JOIN Showroom_cars ON Vehicle_drectory.id = Showroom_cars.vehicle_id
-                  WHERE Showroom_cars.sign = 'not sold';";
+                  WHERE Showroom_cars.sign = 'not sold' ORDER BY $order;";
         $data = $this->connection->connectToDatabase()->query($query);
 
         return $data->fetchAll();

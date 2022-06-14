@@ -15,4 +15,4 @@ Tailwind Css:
 
 Twig:
 
-    composer require "twig/twig:^3.0"
+    composer require "twig/twig:^3.0
